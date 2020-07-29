@@ -1,0 +1,37 @@
+{
+  "name": "boilerplate",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "---- MINIFY ----": "-----------------------------",
+    "minify:css": "uglifycss dist/styles/*.css > dist/styles/image-comparison.min.css",
+    "minify:js": "jsmin -o dist/js/image-comparison.min.js dist/js/*.js",
+    "---- BUILD ----": "-----------------------------",
+    "build:css": "node-sass -o dist/styles/ src/styles/ && npm run minify:css",
+    "---- COPY ----": "-----------------------------",
+    "copy:html": "rm -rf dist/*.html && cp -r src/*.html dist/",
+    "copy:js": "rm -rf dist/js/* && rsync -av src/js/*.js dist/js/ && npm run minify:js",
+    "copy:assets": "rm -rf dist/assets/* && rsync -av src/assets/ dist/assets/",
+    "---- WATCHING ----": "-----------------------------",
+    "watch:scss": "onchange -i 'src/styles/' -- npm run build:css",
+    "watch:html": "onchange -i 'src/*.html' -- npm run copy:html",
+    "watch:js": "onchange -i 'src/js/' -- npm run copy:js",
+    "watch:assets": "onchange -i 'src/assets/' -- npm run copy:assets",
+    "---- GENERAL ----": "-----------------------------",
+    "live": "browser-sync start -s -f 'src/**/*' 'dist/**/*' --startPath 'dist/'",
+    "build": "mkdir -p dist/js/ && mkdir -p dist/styles/ && mkdir -p dist/assets/",
+    "start": "parallelshell 'npm run live' 'npm run build' 'npm run watch:html' 'npm run watch:scss' 'npm run watch:js' 'npm run watch:assets'"
+  },
+  "author": "Sebastian Gołąb",
+  "license": "ISC",
+  "dependencies": {},
+  "devDependencies": {
+    "browser-sync": "^2.26.10",
+    "jsmin": "^1.0.1",
+    "node-sass": "^4.14.1",
+    "onchange": "^7.0.2",
+    "parallelshell": "^3.0.1",
+    "uglifycss": "0.0.29"
+  }
+}

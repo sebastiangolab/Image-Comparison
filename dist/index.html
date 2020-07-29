@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Image Comparison</title>
+
+    <link href="https://fonts.googleapis.com/css2?family=Lato:wght@400;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="./styles/image-comparison.css">
+</head>
+
+<body>
+    <header class="header">
+        <h1 class="page-title">Image Comparison</h1>
+        <p class="author">Sebastian Gołąb</p>
+    </header>
+    <main id="image-comparison">
+        <img src="./assets/images/after.jpg" data-after-image></img>
+        <div class="resize" data-resize-element>
+            <img src="./assets/images/before.jpg" data-before-image></img>
+        </div>
+        <p class="desc before__desc" data-desc-left>Before</p>
+        <p class="desc after__desc" data-desc-right>After</p>
+    </main>
+</body>
+<script src="./js/image-comparison.js"></script>
+<script>
+    new ImageComparison('image-comparison').initialize();
+</script>
+
+</html>
